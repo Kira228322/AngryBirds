@@ -8,16 +8,19 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(LineRenderer))]
 public class SlingerShotPath : MonoBehaviour
 {
-    [SerializeField] private Vector2 _slingShotPivot;
+    [SerializeField] private BirdLauncherController _birdLauncher;
+    [SerializeField] private Transform _pivot;
     private const int _positionCount = 20;
     private const float _timeStep = 0.05f;
     private const float _maxTension = 3f;
     private const float _tensionStrength = 5;
     private LineRenderer _lineRenderer;
     private Vector2 _mousePosition;
-
+    private Vector2 _slingShotPivot;
+    private float _tension;
     private void Awake()
     {
+        _slingShotPivot = _pivot.transform.position;
         _lineRenderer = GetComponent<LineRenderer>();
         _lineRenderer.positionCount = _positionCount;
     }
@@ -37,6 +40,7 @@ public class SlingerShotPath : MonoBehaviour
     
     public void LaunchBird(InputAction.CallbackContext callbackContext)
     {
+        _birdLauncher.CurrentBird.OnBirdLaunch(_tensionStrength * _tension * (_slingShotPivot - _mousePosition).normalized);
         gameObject.SetActive(false);
         GameInputController.Instance.SwitchToOnBirdFlying();
     }
@@ -45,11 +49,11 @@ public class SlingerShotPath : MonoBehaviour
     {
         _mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         
-        float tension = (_slingShotPivot - _mousePosition).magnitude;
-        if (tension > _maxTension)
-            tension = _maxTension;
+        _tension = (_slingShotPivot - _mousePosition).magnitude;
+        if (_tension > _maxTension)
+            _tension = _maxTension;
         
         Vector2 direction = (_slingShotPivot - _mousePosition).normalized;
-        UpdateLine(_tensionStrength * tension * direction);
+        UpdateLine(_tensionStrength * _tension * direction);
     }
 }

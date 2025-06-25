@@ -50,6 +50,62 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""LaucnBird"",
+            ""id"": ""6de4cf33-9b17-4395-b21e-a5da370d3c4e"",
+            ""actions"": [
+                {
+                    ""name"": ""LeftClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""8c21329e-fe3d-449d-9b21-3e623106214e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""3bf7a0b8-c2d7-4ce2-8091-d01cfa3bebbf"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""OnBirdFlying"",
+            ""id"": ""0886b084-5826-4f6b-b95c-46816d23c0fc"",
+            ""actions"": [
+                {
+                    ""name"": ""LeftClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""8c115918-4262-4624-82eb-937b0ddc2161"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""3ca34015-f97a-4e5b-8e4d-911f639473d5"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -57,11 +113,19 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_LeftClick = m_Gameplay.FindAction("LeftClick", throwIfNotFound: true);
+        // LaucnBird
+        m_LaucnBird = asset.FindActionMap("LaucnBird", throwIfNotFound: true);
+        m_LaucnBird_LeftClick = m_LaucnBird.FindAction("LeftClick", throwIfNotFound: true);
+        // OnBirdFlying
+        m_OnBirdFlying = asset.FindActionMap("OnBirdFlying", throwIfNotFound: true);
+        m_OnBirdFlying_LeftClick = m_OnBirdFlying.FindAction("LeftClick", throwIfNotFound: true);
     }
 
     ~@GameInput()
     {
         UnityEngine.Debug.Assert(!m_Gameplay.enabled, "This will cause a leak and performance issues, GameInput.Gameplay.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_LaucnBird.enabled, "This will cause a leak and performance issues, GameInput.LaucnBird.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_OnBirdFlying.enabled, "This will cause a leak and performance issues, GameInput.OnBirdFlying.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -165,7 +229,107 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         }
     }
     public GameplayActions @Gameplay => new GameplayActions(this);
+
+    // LaucnBird
+    private readonly InputActionMap m_LaucnBird;
+    private List<ILaucnBirdActions> m_LaucnBirdActionsCallbackInterfaces = new List<ILaucnBirdActions>();
+    private readonly InputAction m_LaucnBird_LeftClick;
+    public struct LaucnBirdActions
+    {
+        private @GameInput m_Wrapper;
+        public LaucnBirdActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @LeftClick => m_Wrapper.m_LaucnBird_LeftClick;
+        public InputActionMap Get() { return m_Wrapper.m_LaucnBird; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(LaucnBirdActions set) { return set.Get(); }
+        public void AddCallbacks(ILaucnBirdActions instance)
+        {
+            if (instance == null || m_Wrapper.m_LaucnBirdActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_LaucnBirdActionsCallbackInterfaces.Add(instance);
+            @LeftClick.started += instance.OnLeftClick;
+            @LeftClick.performed += instance.OnLeftClick;
+            @LeftClick.canceled += instance.OnLeftClick;
+        }
+
+        private void UnregisterCallbacks(ILaucnBirdActions instance)
+        {
+            @LeftClick.started -= instance.OnLeftClick;
+            @LeftClick.performed -= instance.OnLeftClick;
+            @LeftClick.canceled -= instance.OnLeftClick;
+        }
+
+        public void RemoveCallbacks(ILaucnBirdActions instance)
+        {
+            if (m_Wrapper.m_LaucnBirdActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ILaucnBirdActions instance)
+        {
+            foreach (var item in m_Wrapper.m_LaucnBirdActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_LaucnBirdActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public LaucnBirdActions @LaucnBird => new LaucnBirdActions(this);
+
+    // OnBirdFlying
+    private readonly InputActionMap m_OnBirdFlying;
+    private List<IOnBirdFlyingActions> m_OnBirdFlyingActionsCallbackInterfaces = new List<IOnBirdFlyingActions>();
+    private readonly InputAction m_OnBirdFlying_LeftClick;
+    public struct OnBirdFlyingActions
+    {
+        private @GameInput m_Wrapper;
+        public OnBirdFlyingActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @LeftClick => m_Wrapper.m_OnBirdFlying_LeftClick;
+        public InputActionMap Get() { return m_Wrapper.m_OnBirdFlying; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(OnBirdFlyingActions set) { return set.Get(); }
+        public void AddCallbacks(IOnBirdFlyingActions instance)
+        {
+            if (instance == null || m_Wrapper.m_OnBirdFlyingActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_OnBirdFlyingActionsCallbackInterfaces.Add(instance);
+            @LeftClick.started += instance.OnLeftClick;
+            @LeftClick.performed += instance.OnLeftClick;
+            @LeftClick.canceled += instance.OnLeftClick;
+        }
+
+        private void UnregisterCallbacks(IOnBirdFlyingActions instance)
+        {
+            @LeftClick.started -= instance.OnLeftClick;
+            @LeftClick.performed -= instance.OnLeftClick;
+            @LeftClick.canceled -= instance.OnLeftClick;
+        }
+
+        public void RemoveCallbacks(IOnBirdFlyingActions instance)
+        {
+            if (m_Wrapper.m_OnBirdFlyingActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IOnBirdFlyingActions instance)
+        {
+            foreach (var item in m_Wrapper.m_OnBirdFlyingActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_OnBirdFlyingActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public OnBirdFlyingActions @OnBirdFlying => new OnBirdFlyingActions(this);
     public interface IGameplayActions
+    {
+        void OnLeftClick(InputAction.CallbackContext context);
+    }
+    public interface ILaucnBirdActions
+    {
+        void OnLeftClick(InputAction.CallbackContext context);
+    }
+    public interface IOnBirdFlyingActions
     {
         void OnLeftClick(InputAction.CallbackContext context);
     }

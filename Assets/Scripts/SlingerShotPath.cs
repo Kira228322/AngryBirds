@@ -40,7 +40,7 @@ public class SlingerShotPath : MonoBehaviour
     
     public void LaunchBird(InputAction.CallbackContext callbackContext)
     {
-        _birdLauncher.CurrentBird.OnBirdLaunch(_tensionStrength * _tension * (_slingShotPivot - _mousePosition).normalized);
+        _birdLauncher.LaunchBird(_tensionStrength * _tension * (_slingShotPivot - _mousePosition).normalized);
         gameObject.SetActive(false);
         GameInputController.Instance.SwitchToOnBirdFlying();
     }

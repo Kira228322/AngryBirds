@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class SlingShotZoneActivation : MonoBehaviour
 {
     [SerializeField] private LayerMask _LaunchZoneMask;
-    
+    [SerializeField] private SlingerShotPath _shotPath;
     private bool CheckCursorInArea()
     {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -22,6 +22,8 @@ public class SlingShotZoneActivation : MonoBehaviour
         if (!CheckCursorInArea())
             return;
         
-        GameInputController.Instance.SwitchToLaunchBird();
+        _shotPath.gameObject.SetActive(true);
     }
+    
+    
 }

@@ -42,7 +42,7 @@ public class SlingerShotPath : MonoBehaviour
     {
         _birdLauncher.LaunchBird(_tensionStrength * _tension * (_slingShotPivot - _mousePosition).normalized);
         gameObject.SetActive(false);
-        GameInputController.Instance.SwitchToOnBirdFlying();
+        // GameInputController.Instance.SwitchToOnBirdFlying();
     }
 
     private void Update()

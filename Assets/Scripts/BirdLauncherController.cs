@@ -40,7 +40,7 @@ public class BirdLauncherController : MonoBehaviour
         {
             x = Mathf.Lerp(startPosition.x, _SlingerShotPivot.position.x, i);
             
-            y = Mathf.Lerp(startPosition.y, _SlingerShotPivot.position.y, (float)Math.Sqrt(i));
+            y = Mathf.Lerp(startPosition.y, _SlingerShotPivot.position.y, Mathf.Sqrt(i));
             
             bird.transform.position = new Vector2(x, y);
             

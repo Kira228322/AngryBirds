@@ -9,7 +9,8 @@ public class GameInputController : MonoBehaviour
     [SerializeField] private SlingerShotPath _shotPath;
     [SerializeField] private SlingShotZoneActivation _slingShotZone;
     private GameInput _gameInput;
-    private void Awake()
+
+    public void Initialize()
     {
         if (Instance == null)
             Instance = this;
@@ -19,7 +20,8 @@ public class GameInputController : MonoBehaviour
 
         _gameInput.Gameplay.LeftClick.performed += _slingShotZone.OnLeftMouseClick;
         _gameInput.Gameplay.LeftClick.canceled += _shotPath.LaunchBird;
-            
+        _gameInput.OnBirdFlying.LeftClick.performed += BirdLauncherController.Instance.ActivateCurrentBirdPower;
+        
         _gameInput.Gameplay.Enable();
         _gameInput.OnBirdFlying.Disable();
     }

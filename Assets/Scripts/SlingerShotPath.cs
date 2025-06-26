@@ -8,7 +8,6 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(LineRenderer))]
 public class SlingerShotPath : MonoBehaviour
 {
-    [SerializeField] private BirdLauncherController _birdLauncher;
     [SerializeField] private Transform _pivot;
     private const int _positionCount = 20;
     private const float _timeStep = 0.05f;
@@ -40,9 +39,12 @@ public class SlingerShotPath : MonoBehaviour
     
     public void LaunchBird(InputAction.CallbackContext callbackContext)
     {
-        _birdLauncher.LaunchBird(_tensionStrength * _tension * (_slingShotPivot - _mousePosition).normalized);
+        if (BirdLauncherController.Instance.SlingShotBird == null)
+            return;
+        
+        BirdLauncherController.Instance.LaunchBird(_tensionStrength * _tension * (_slingShotPivot - _mousePosition).normalized);
         gameObject.SetActive(false);
-        // GameInputController.Instance.SwitchToOnBirdFlying();
+        GameInputController.Instance.SwitchToOnBirdFlying();
     }
 
     private void Update()

@@ -21,6 +21,8 @@ public class SlingShotZoneActivation : MonoBehaviour
     {
         if (!CheckCursorInArea())
             return;
+        if (BirdLauncherController.Instance.SlingShotBird == null)
+            return;
         
         _shotPath.gameObject.SetActive(true);
     }

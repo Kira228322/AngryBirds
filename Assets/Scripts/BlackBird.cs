@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class BlackBird : Bird
 {
+    [SerializeField] private GameObject _explosion; 
     [SerializeField] private ContactFilter2D _contactFilter;
     private float _explosionRadius = 1.75f;
     private float _explosionForce = 20;
     public override void ActivatePower()
     {
+        _explosion.SetActive(true);
+        _explosion.transform.SetParent(null);
+        
         List<Collider2D> _colliders = new List<Collider2D>();
         Physics2D.OverlapCircle(gameObject.transform.position, _explosionRadius, _contactFilter, _colliders);
         

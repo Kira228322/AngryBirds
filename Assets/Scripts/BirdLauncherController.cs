@@ -18,7 +18,10 @@ public class BirdLauncherController : MonoBehaviour
     {
         _birds = new Stack<Bird>(_birdsList);
         _birdsList.Clear();
-        SlingShotBird = _birds.Pop();
+        if (_birds.TryPop(out Bird bird))
+        {
+            StartCoroutine(PlacingBirdIntoSlingerShot(bird));
+        }
     }
 
     public void Initialize()

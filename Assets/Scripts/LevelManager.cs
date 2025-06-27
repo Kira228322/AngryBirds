@@ -9,6 +9,11 @@ public class LevelManager : MonoBehaviour
     public int GoalEnemy { get; private set; }
     public int DefeatedEnemy{ get; private set; }
 
+    
+    public int CurrentLevel;
+    private int _maxUnlockedLevel = 1;
+
+    
     public void Initialize()
     {
         if (Instance == null)
@@ -25,7 +30,15 @@ public class LevelManager : MonoBehaviour
         DefeatedEnemy++;
         if (DefeatedEnemy == GoalEnemy)
         {
-            Debug.Log("WIN");
+            LevelCompleted();
         }
+    }
+    
+    private void LevelCompleted()
+    {
+        if (CurrentLevel == _maxUnlockedLevel)
+            _maxUnlockedLevel++;
+        
+        CanvasController.Instance.EnableLevelCompletedPanel(CurrentLevel+1);
     }
 }

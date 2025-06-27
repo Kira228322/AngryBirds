@@ -45,7 +45,7 @@ public class BirdLauncherController : MonoBehaviour
     {
         float timeStep = 0.02f;
         WaitForSeconds deltaTime = new WaitForSeconds(timeStep);
-        float animationTime = 1.5f;
+        float animationTime = 0.75f;
         
         Vector2 startPosition = bird.transform.position;
         Quaternion startRotation = bird.transform.rotation;
@@ -70,7 +70,7 @@ public class BirdLauncherController : MonoBehaviour
     {
         if (FlyingBird == null)
             return;
-        
+        Debug.Log("ACTIVATE");
         FlyingBird.ActivatePower();
         GameInputController.Instance.SwitchToGameplay();
     }

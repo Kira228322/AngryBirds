@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public abstract class Bird : MonoBehaviour
 {
     private Collider2D _collider;
@@ -14,17 +15,11 @@ public abstract class Bird : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        BirdLauncherController.Instance.FlyingBird = null;
-        GameInputController.Instance.SwitchToGameplay();
-    }
-
     public void OnBirdLaunch(Vector2 velocity)
     {
         _collider.enabled = true;
         _rigidbody.bodyType = RigidbodyType2D.Dynamic;
-        _rigidbody.AddForce(velocity, ForceMode2D.Impulse);
+        _rigidbody.AddForce(velocity * _rigidbody.mass, ForceMode2D.Impulse);
     }
 
     public abstract void ActivatePower();

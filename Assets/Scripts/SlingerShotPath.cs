@@ -12,7 +12,7 @@ public class SlingerShotPath : MonoBehaviour
     private const int _positionCount = 20;
     private const float _timeStep = 0.05f;
     private const float _maxTension = 3f;
-    private const float _tensionStrength = 5;
+    private const float _tensionStrength = 4;
     private LineRenderer _lineRenderer;
     private Vector2 _mousePosition;
     private Vector2 _slingShotPivot;

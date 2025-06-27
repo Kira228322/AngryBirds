@@ -9,6 +9,7 @@ public class DamagableObject : MonoBehaviour
     [SerializeField] private float hp;
     private Rigidbody2D _rigidbody;
     private IOnDestroyHappen _onDestroyHappen;
+    private const float _minVelocityToDamage = 0.5f; 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -17,19 +18,22 @@ public class DamagableObject : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        if (other.relativeVelocity.magnitude < _minVelocityToDamage)
+            return;
+        
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ground")) // объект об землю = v * m (собственная)
         {   
             ApplyHit(other.relativeVelocity.magnitude * _rigidbody.mass);
         }
-        else if (other.gameObject.layer == LayerMask.NameToLayer("Bird"))
+        else if (other.gameObject.layer == LayerMask.NameToLayer("Bird")) // объект об птицу = 2vm
         {
             Rigidbody2D rigidbody = other.gameObject.GetComponent<Rigidbody2D>();
             ApplyHit(2 * other.relativeVelocity.magnitude * rigidbody.mass);
         }
-        else 
+        else // объект об объект = v * m
         {
             Rigidbody2D rigidbody = other.gameObject.GetComponent<Rigidbody2D>();
-            ApplyHit(other.relativeVelocity.magnitude * Mathf.Sqrt(rigidbody.mass));
+            ApplyHit(other.relativeVelocity.magnitude * rigidbody.mass);
         }
     }
 

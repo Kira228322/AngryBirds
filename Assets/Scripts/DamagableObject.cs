@@ -25,10 +25,10 @@ public class DamagableObject : MonoBehaviour
         {   
             ApplyHit(other.relativeVelocity.magnitude * _rigidbody.mass);
         }
-        else if (other.gameObject.layer == LayerMask.NameToLayer("Bird")) // объект об птицу = 2vm
+        else if (other.gameObject.layer == LayerMask.NameToLayer("Bird")) // объект об птицу = 2.5vm
         {
             Rigidbody2D rigidbody = other.gameObject.GetComponent<Rigidbody2D>();
-            ApplyHit(2 * other.relativeVelocity.magnitude * rigidbody.mass);
+            ApplyHit(2.5f * other.relativeVelocity.magnitude * rigidbody.mass);
         }
         else // объект об объект = v * m
         {

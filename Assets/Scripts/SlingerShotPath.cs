@@ -39,6 +39,8 @@ public class SlingerShotPath : MonoBehaviour
     
     public void LaunchBird(InputAction.CallbackContext callbackContext)
     {
+        if (!isActiveAndEnabled)
+            return;
         if (BirdLauncherController.Instance.SlingShotBird == null)
             return;
         

@@ -9,9 +9,9 @@ public class BlueBird : Bird
         GameObject topBird = Instantiate(gameObject);
         GameObject bottomBird = Instantiate(gameObject);
         
-        topBird.transform.position += Vector3.up;
-        bottomBird.transform.position += Vector3.down;
-
+        topBird.transform.position += gameObject.transform.up;
+        bottomBird.transform.position += -gameObject.transform.up;
+        
         topBird.GetComponent<Rigidbody2D>().velocity = _rigidbody.velocity;
         bottomBird.GetComponent<Rigidbody2D>().velocity = _rigidbody.velocity;
     }

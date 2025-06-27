@@ -60,6 +60,7 @@ public class BirdLauncherController : MonoBehaviour
         }
 
         SlingShotBird = bird;
+        SlingShotBird.GetComponent<RotationTowardsMoving>().enabled = true;
     }
 
     public void ActivateCurrentBirdPower(InputAction.CallbackContext callbackContext)

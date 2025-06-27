@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 7366113665843593975}
   - component: {fileID: 3386253953572478214}
   - component: {fileID: 4497932210349122819}
+  - component: {fileID: 7994386911016497538}
+  - component: {fileID: 290150577620326396}
   m_Layer: 0
   m_Name: RedBird
   m_TagString: Untagged
@@ -181,5 +183,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 00007a32e29f3ae4393f4d701d26f86e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7994386911016497538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 393583547007564859}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a517abb41a09b548832ff1ef5b2b72f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &290150577620326396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 393583547007564859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 191e40faa76d14f4b8b489d73242a476, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

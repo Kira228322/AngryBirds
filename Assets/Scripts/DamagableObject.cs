@@ -18,27 +18,30 @@ public class DamagableObject : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.relativeVelocity.magnitude < _minVelocityToDamage)
+        float relativeVelocity = other.relativeVelocity.magnitude;
+        if (relativeVelocity < _minVelocityToDamage)
             return;
         
-        if (other.gameObject.layer == LayerMask.NameToLayer("Ground")) // объект об землю = v * m (собственная)
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ground")) // объект об землю = v * (m+1) (собственная)
         {   
-            ApplyHit(other.relativeVelocity.magnitude * _rigidbody.mass);
+            ApplyHit(relativeVelocity * (_rigidbody.mass + 1));
         }
         else if (other.gameObject.layer == LayerMask.NameToLayer("Bird")) // объект об птицу = 2.5vm
         {
             Rigidbody2D rigidbody = other.gameObject.GetComponent<Rigidbody2D>();
-            ApplyHit(2.5f * other.relativeVelocity.magnitude * rigidbody.mass);
+            ApplyHit(2.5f * relativeVelocity * rigidbody.mass);
         }
         else // объект об объект = v * m
         {
             Rigidbody2D rigidbody = other.gameObject.GetComponent<Rigidbody2D>();
-            ApplyHit(other.relativeVelocity.magnitude * rigidbody.mass);
+            ApplyHit(relativeVelocity * rigidbody.mass);
         }
     }
 
     public void ApplyHit(float damage)
     {
+        if (hp <= 0)
+            return;
         hp -= damage;
         if (hp <= 0)
             Destroy();

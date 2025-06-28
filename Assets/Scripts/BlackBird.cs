@@ -6,8 +6,9 @@ public class BlackBird : Bird
 {
     [SerializeField] private GameObject _explosion; 
     [SerializeField] private ContactFilter2D _contactFilter;
-    private float _explosionRadius = 1.75f;
-    private float _explosionForce = 20;
+    private float _damagePerDistance = 12; 
+    private float _explosionRadius = 2f;
+    private float _explosionForce = 20f;
     public override void ActivatePower()
     {
         _explosion.SetActive(true);
@@ -18,13 +19,20 @@ public class BlackBird : Bird
         
         foreach (var collider in _colliders)
         {
-            Vector2 force = collider.transform.position - gameObject.transform.position;
+            Vector2 closestPoint = collider.ClosestPoint(gameObject.transform.position);
+            Vector2 force = closestPoint - (Vector2)gameObject.transform.position;
             float distance = force.magnitude;
             force += Vector2.up * 3; 
             force = force.normalized;
             force /= distance;
             force *= _explosionForce;
             collider.GetComponent<Rigidbody2D>().AddForce(force, ForceMode2D.Impulse);
+            
+            if (collider.TryGetComponent(out DamagableObject component))
+            {
+                component.ApplyHit(_damagePerDistance/distance);
+            }
         }
     }
+    
 }

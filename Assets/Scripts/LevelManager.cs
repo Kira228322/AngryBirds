@@ -12,7 +12,7 @@ public class LevelManager : MonoBehaviour
     
     public int CurrentLevel;
     private int _maxUnlockedLevel = 1;
-
+    public readonly int MaxLevel = 5;
     
     public void Awake()
     {

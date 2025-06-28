@@ -10,6 +10,8 @@ public class LevelCompletedPanel : MonoBehaviour
     
     public void SetNextLevelButton(int n)
     {
+        if (n > LevelManager.Instance.MaxLevel)
+            _goToNextLevelButton.interactable = false;
         _goToNextLevelButton.onClick.AddListener(() => _levelTransitionManager.LoadScene(n));
     }
 }

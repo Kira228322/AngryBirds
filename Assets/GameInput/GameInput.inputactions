@@ -6,7 +6,7 @@
             "id": "f8b100e0-819e-43ea-a0a1-172f20ac2b31",
             "actions": [
                 {
-                    "name": "LeftClick",
+                    "name": "TapScreen",
                     "type": "Button",
                     "id": "4ce2b5a2-ad9f-403b-af3e-12152670da42",
                     "expectedControlType": "",
@@ -19,11 +19,22 @@
                 {
                     "name": "",
                     "id": "7d287627-35d8-48f3-ae9f-06c640c4ce01",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TapScreen",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "88211c43-d478-48fb-8ba8-b21b99abbee8",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "LeftClick",
+                    "action": "TapScreen",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -34,7 +45,7 @@
             "id": "0886b084-5826-4f6b-b95c-46816d23c0fc",
             "actions": [
                 {
-                    "name": "LeftClick",
+                    "name": "TapScreen",
                     "type": "Button",
                     "id": "8c115918-4262-4624-82eb-937b0ddc2161",
                     "expectedControlType": "",
@@ -47,11 +58,22 @@
                 {
                     "name": "",
                     "id": "3ca34015-f97a-4e5b-8e4d-911f639473d5",
+                    "path": "<Touchscreen>/primaryTouch/tap",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TapScreen",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9bfdeadf-ce32-4634-8fd8-8cb1aa61f8cb",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "LeftClick",
+                    "action": "TapScreen",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

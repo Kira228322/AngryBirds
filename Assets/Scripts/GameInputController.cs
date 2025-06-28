@@ -18,9 +18,9 @@ public class GameInputController : MonoBehaviour
         _gameInput = new GameInput();
         _gameInput.Enable();
 
-        _gameInput.Gameplay.LeftClick.performed += _slingShotZone.OnLeftMouseClick;
-        _gameInput.Gameplay.LeftClick.canceled += _shotPath.LaunchBird;
-        _gameInput.OnBirdFlying.LeftClick.performed += BirdLauncherController.Instance.ActivateCurrentBirdPower;
+        _gameInput.Gameplay.TapScreen.started += _slingShotZone.OnLeftMouseClick;
+        _gameInput.Gameplay.TapScreen.canceled += _shotPath.LaunchBird;
+        _gameInput.OnBirdFlying.TapScreen.started += BirdLauncherController.Instance.ActivateCurrentBirdPower;
         
         _gameInput.Gameplay.Enable();
         _gameInput.OnBirdFlying.Disable();

@@ -28,7 +28,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             ""id"": ""f8b100e0-819e-43ea-a0a1-172f20ac2b31"",
             ""actions"": [
                 {
-                    ""name"": ""LeftClick"",
+                    ""name"": ""TapScreen"",
                     ""type"": ""Button"",
                     ""id"": ""4ce2b5a2-ad9f-403b-af3e-12152670da42"",
                     ""expectedControlType"": """",
@@ -41,11 +41,22 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""7d287627-35d8-48f3-ae9f-06c640c4ce01"",
+                    ""path"": ""<Touchscreen>/Press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TapScreen"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""88211c43-d478-48fb-8ba8-b21b99abbee8"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""LeftClick"",
+                    ""action"": ""TapScreen"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -56,7 +67,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             ""id"": ""0886b084-5826-4f6b-b95c-46816d23c0fc"",
             ""actions"": [
                 {
-                    ""name"": ""LeftClick"",
+                    ""name"": ""TapScreen"",
                     ""type"": ""Button"",
                     ""id"": ""8c115918-4262-4624-82eb-937b0ddc2161"",
                     ""expectedControlType"": """",
@@ -69,11 +80,22 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""3ca34015-f97a-4e5b-8e4d-911f639473d5"",
+                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TapScreen"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9bfdeadf-ce32-4634-8fd8-8cb1aa61f8cb"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""LeftClick"",
+                    ""action"": ""TapScreen"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -84,10 +106,10 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
 }");
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
-        m_Gameplay_LeftClick = m_Gameplay.FindAction("LeftClick", throwIfNotFound: true);
+        m_Gameplay_TapScreen = m_Gameplay.FindAction("TapScreen", throwIfNotFound: true);
         // OnBirdFlying
         m_OnBirdFlying = asset.FindActionMap("OnBirdFlying", throwIfNotFound: true);
-        m_OnBirdFlying_LeftClick = m_OnBirdFlying.FindAction("LeftClick", throwIfNotFound: true);
+        m_OnBirdFlying_TapScreen = m_OnBirdFlying.FindAction("TapScreen", throwIfNotFound: true);
     }
 
     ~@GameInput()
@@ -155,12 +177,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     // Gameplay
     private readonly InputActionMap m_Gameplay;
     private List<IGameplayActions> m_GameplayActionsCallbackInterfaces = new List<IGameplayActions>();
-    private readonly InputAction m_Gameplay_LeftClick;
+    private readonly InputAction m_Gameplay_TapScreen;
     public struct GameplayActions
     {
         private @GameInput m_Wrapper;
         public GameplayActions(@GameInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @LeftClick => m_Wrapper.m_Gameplay_LeftClick;
+        public InputAction @TapScreen => m_Wrapper.m_Gameplay_TapScreen;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -170,16 +192,16 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_GameplayActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_GameplayActionsCallbackInterfaces.Add(instance);
-            @LeftClick.started += instance.OnLeftClick;
-            @LeftClick.performed += instance.OnLeftClick;
-            @LeftClick.canceled += instance.OnLeftClick;
+            @TapScreen.started += instance.OnTapScreen;
+            @TapScreen.performed += instance.OnTapScreen;
+            @TapScreen.canceled += instance.OnTapScreen;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
         {
-            @LeftClick.started -= instance.OnLeftClick;
-            @LeftClick.performed -= instance.OnLeftClick;
-            @LeftClick.canceled -= instance.OnLeftClick;
+            @TapScreen.started -= instance.OnTapScreen;
+            @TapScreen.performed -= instance.OnTapScreen;
+            @TapScreen.canceled -= instance.OnTapScreen;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -201,12 +223,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     // OnBirdFlying
     private readonly InputActionMap m_OnBirdFlying;
     private List<IOnBirdFlyingActions> m_OnBirdFlyingActionsCallbackInterfaces = new List<IOnBirdFlyingActions>();
-    private readonly InputAction m_OnBirdFlying_LeftClick;
+    private readonly InputAction m_OnBirdFlying_TapScreen;
     public struct OnBirdFlyingActions
     {
         private @GameInput m_Wrapper;
         public OnBirdFlyingActions(@GameInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @LeftClick => m_Wrapper.m_OnBirdFlying_LeftClick;
+        public InputAction @TapScreen => m_Wrapper.m_OnBirdFlying_TapScreen;
         public InputActionMap Get() { return m_Wrapper.m_OnBirdFlying; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -216,16 +238,16 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_OnBirdFlyingActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_OnBirdFlyingActionsCallbackInterfaces.Add(instance);
-            @LeftClick.started += instance.OnLeftClick;
-            @LeftClick.performed += instance.OnLeftClick;
-            @LeftClick.canceled += instance.OnLeftClick;
+            @TapScreen.started += instance.OnTapScreen;
+            @TapScreen.performed += instance.OnTapScreen;
+            @TapScreen.canceled += instance.OnTapScreen;
         }
 
         private void UnregisterCallbacks(IOnBirdFlyingActions instance)
         {
-            @LeftClick.started -= instance.OnLeftClick;
-            @LeftClick.performed -= instance.OnLeftClick;
-            @LeftClick.canceled -= instance.OnLeftClick;
+            @TapScreen.started -= instance.OnTapScreen;
+            @TapScreen.performed -= instance.OnTapScreen;
+            @TapScreen.canceled -= instance.OnTapScreen;
         }
 
         public void RemoveCallbacks(IOnBirdFlyingActions instance)
@@ -245,10 +267,10 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     public OnBirdFlyingActions @OnBirdFlying => new OnBirdFlyingActions(this);
     public interface IGameplayActions
     {
-        void OnLeftClick(InputAction.CallbackContext context);
+        void OnTapScreen(InputAction.CallbackContext context);
     }
     public interface IOnBirdFlyingActions
     {
-        void OnLeftClick(InputAction.CallbackContext context);
+        void OnTapScreen(InputAction.CallbackContext context);
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class LevelManager : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class LevelManager : MonoBehaviour
 
     
     public int CurrentLevel;
-    private int _maxUnlockedLevel = 1;
+    [HideInInspector] public int MaxUnlockedLevel = 1;
     public readonly int MaxLevel = 5;
     
     public void Awake()
@@ -42,8 +43,8 @@ public class LevelManager : MonoBehaviour
     
     private void LevelCompleted()
     {
-        if (CurrentLevel == _maxUnlockedLevel)
-            _maxUnlockedLevel++;
+        if (CurrentLevel == MaxUnlockedLevel && CurrentLevel != MaxLevel)
+            MaxUnlockedLevel++;
         
         CanvasController.Instance.EnableLevelCompletedPanel(CurrentLevel+1);
     }

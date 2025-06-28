@@ -14,4 +14,12 @@ public class LevelTransitionManager : MonoBehaviour
         SceneManager.LoadScene(n);
         LevelManager.Instance.CurrentLevel = n;
     }
+
+    public void ReloadLevel()
+    {
+        if (GameInputController.Instance != null)
+            GameInputController.Instance.DisableInput();
+        LevelManager.Instance.ResetGoal();
+        SceneManager.LoadScene(LevelManager.Instance.CurrentLevel);
+    }
 }

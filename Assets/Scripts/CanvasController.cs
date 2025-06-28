@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CanvasController : MonoBehaviour
 {
@@ -10,10 +11,16 @@ public class CanvasController : MonoBehaviour
     [SerializeField] private TMP_Text _goalText;
     [SerializeField] private LevelCompletedPanel _levelCompletedPanel;
     [SerializeField] private GameObject _levelsPanel;
+    [SerializeField] private List<Button> _levelButtons; 
     public void Initialize()
     {
         if (Instance == null)
             Instance = this;
+        
+        for (int i = 0; i < LevelManager.Instance.MaxUnlockedLevel; i++)
+        {
+            _levelButtons[i].interactable = true;
+        }
     }
     
     public void UpdateGoal()

@@ -14,7 +14,7 @@ public class LevelManager : MonoBehaviour
     private int _maxUnlockedLevel = 1;
 
     
-    public void Initialize()
+    public void Awake()
     {
         if (Instance == null)
             Instance = this;
@@ -32,6 +32,12 @@ public class LevelManager : MonoBehaviour
         {
             LevelCompleted();
         }
+    }
+
+    public void ResetGoal()
+    {
+        GoalEnemy = 0;
+        DefeatedEnemy = 0;
     }
     
     private void LevelCompleted()

@@ -70,7 +70,6 @@ public class BirdLauncherController : MonoBehaviour
     {
         if (FlyingBird == null)
             return;
-        Debug.Log("ACTIVATE");
         FlyingBird.ActivatePower();
         GameInputController.Instance.SwitchToGameplay();
     }

@@ -37,4 +37,10 @@ public class GameInputController : MonoBehaviour
         _gameInput.Gameplay.Disable();
         _gameInput.OnBirdFlying.Enable();
     }
+
+    public void DisableInput()
+    {
+        _gameInput.Gameplay.Disable();
+        _gameInput.OnBirdFlying.Disable();
+    }
 }

@@ -6,11 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class LevelTransitionManager : MonoBehaviour
 {
-    [SerializeField] private LevelManager _levelManager;
     public void LoadScene(int n)
     {
+        if (GameInputController.Instance != null)
+            GameInputController.Instance.DisableInput();
+        LevelManager.Instance.ResetGoal();
         SceneManager.LoadScene(n);
-        CanvasController.Instance.enabled = true;
-        _levelManager.CurrentLevel = n;
+        LevelManager.Instance.CurrentLevel = n;
     }
 }
